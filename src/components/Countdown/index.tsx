@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import styles from '../styles/components/Coundown.module.css'
+import { CountdownButton, CountdownContainer, DigitGroup } from './styles'
 
 export function Countdown() {
   const [isActive, setIsActive] = useState(false)
@@ -11,35 +11,35 @@ export function Countdown() {
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('')
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('')
 
-  function startCountdown() {
-    setIsActive(true)
+  function toggleCountdown() {
+    setIsActive((active) => !active)
   }
 
   useEffect(() => {
     if (isActive && remainingSeconds > 0) {
       setTimeout(() => {
-        setRemainingSeconds(seconds => seconds - 1)
+        setRemainingSeconds((seconds) => seconds - 1)
       }, 1000)
     }
   }, [isActive, remainingSeconds])
 
   return (
     <div>
-      <div className={styles.countdownContainer}>
-        <div>
+      <CountdownContainer>
+        <DigitGroup>
           <span>{minuteLeft}</span>
           <span>{minuteRight}</span>
-        </div>
+        </DigitGroup>
         <span>:</span>
-        <div>
+        <DigitGroup>
           <span>{secondLeft}</span>
           <span>{secondRight}</span>
-        </div>
-      </div>
+        </DigitGroup>
+      </CountdownContainer>
 
-      <button type='button' className={styles.countdownButton} onClick={startCountdown}>
-        Iniciar um ciclo
-      </button>
+      <CountdownButton type="button" onClick={toggleCountdown}>
+        {isActive ? 'Abandonar ciclo' : 'Iniciar um ciclo'}
+      </CountdownButton>
     </div>
   )
 }

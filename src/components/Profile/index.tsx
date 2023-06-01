@@ -1,16 +1,16 @@
-import styles from '../styles/components/Profile.module.css'
+import { NameContainer, ProfileContainer } from './styles'
 
 export function Profile() {
   return (
-    <div className={styles.profileContainer}>
+    <ProfileContainer>
       <img src="https://github.com/lucascprazeres.png" alt="" />
-      <div>
+      <NameContainer>
         <strong>Lucas Prazeres</strong>
         <p>
           <img src="icons/level.svg" alt="" />
           Level 1
         </p>
-      </div>
-    </div>
+      </NameContainer>
+    </ProfileContainer>
   )
 }
